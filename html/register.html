@@ -37,32 +37,42 @@
     <h1>Đăng ký</h1>
     <form id="registerForm" onsubmit="return checkRegister()">
       <label for="username">Tên đăng nhập:</label>
-      <input type="text" id="newUsername" name="newUsername">
+      <input type="text" id="username" name="username" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" 
+             title="Tên đăng nhập phải có tối thiểu 6 kí tự, bao gồm cả chữ và số.">
 
-      <label for="newPassword">Mật khẩu:</label>
-      <input type="password" id="newPassword" name="newPassword">
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+             title="Mật khẩu phải có tối thiểu 8 kí tự, bao gồm cả chữ viết hoa, chữ thường và số.">
 
       <input type="submit" value="Đăng ký">
-    </form>  
-    <script>
-      function showRegister() {
-        document.getElementById("registerForm").style.display = "block";
-      }
+    </form>
 
+    <p>Nếu đã có tài khoản, vui lòng <a href="../html/login.html">đăng nhập</a>.</p>
+
+    <script>
       function checkRegister() {
-        var newUsername = document.getElementById("newUsername").value;
-        var newPassword = document.getElementById("newPassword").value;
-        if (newUsername == "" || newPassword == "") {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username == "" || password == "") {
           alert("Vui lòng nhập đầy đủ thông tin đăng ký.");
-return false;
-}
-else {
-// Lưu thông tin đăng ký của người dùng ở đây.
-alert("Đăng ký thành công!");
-return true;
-}
-}
-</script>
+          return false;
+        }
+        else {
+          // Kiểm tra thông tin đăng ký của người dùng ở đây.
+          // Nếu thông tin không hợp lệ, hiển thị thông báo.
+          var isValidRegister = true; // Giả sử thông tin đăng ký hợp lệ.
+          if (!isValidRegister) {
+            alert("Tên đăng nhập hoặc mật khẩu không hợp lệ.");
+            return false;
+          }
+          else {
+            alert("Đăng ký thành công!");
+            window.location.href = "../html/login.html";
+            return false;
+          }
+        }
+      }
+    </script>
 
   </body>
 </html>
